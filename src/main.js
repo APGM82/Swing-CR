@@ -10,33 +10,6 @@ function saveEvents() {
 
 // Inicializar aplicación
 function init() {
-  const app = document.querySelector('#app');
-  app.innerHTML = `
-    <div class="container">
-      <header>
-        <h1>🎷 Festival de Swing - Ciudad Real</h1>
-      </header>
-      
-      <main>
-        <section class="form-section">
-          <h2>Registrar Actividad</h2>
-          <form id="event-form">
-            <input type="text" id="event-name" placeholder="Nombre del evento" required>
-            <input type="date" id="event-date" required>
-            <input type="time" id="event-time" required>
-            <input type="text" id="event-location" placeholder="Ubicación" required>
-            <button type="submit">Agregar</button>
-          </form>
-        </section>
-        
-        <section class="program-section">
-          <h2>Programa del Festival</h2>
-          <div id="events-list"></div>
-        </section>
-      </main>
-    </div>
-  `;
-  
   setupEventListeners();
   renderEvents();
 }
