@@ -55,14 +55,14 @@ form {
   gap: 15px;
 }
 
-input, button {
+input, button, select {
   padding: 12px;
   border: 2px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
 }
 
-input:focus {
+input:focus, select:focus {
   outline: none;
   border-color: #8B4513;
 }
@@ -154,4 +154,57 @@ button:hover {
   h1 {
     font-size: 1.5rem;
   }
+}
+
+/* Estilos para categorías de eventos */
+.category-section {
+  margin-bottom: 30px;
+}
+
+.category-title {
+  background: linear-gradient(135deg, #8B4513, #A0522D);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+}
+
+.fiesta-title {
+  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+}
+
+.clase-title {
+  background: linear-gradient(135deg, #4ECDC4, #44A08D);
+}
+
+.events-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.fiesta-card {
+  border-left: 5px solid #FF6B6B;
+  background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+}
+
+.clase-card {
+  border-left: 5px solid #4ECDC4;
+  background: linear-gradient(135deg, #f0fffe, #e8fffe);
+}
+
+.fiesta-card .event-header h4 {
+  color: #FF6B6B;
+}
+
+.clase-card .event-header h4 {
+  color: #4ECDC4;
+}
+
+.event-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
