@@ -23,7 +23,7 @@ h1 {
 }
 
 h2 {
-  color: #8B4513;
+  color: brown;
 }
 
 main {
@@ -31,13 +31,13 @@ main {
   gap: 20px;
 }
 
-.form-section {
+.seccion-formulario {
   background-color: white;
   padding: 20px;
   width: 400px;
 }
 
-.program-section {
+.seccion-programa {
   background-color: white;
   padding: 20px;
   flex: 1;
@@ -52,7 +52,7 @@ form {
 input, select, textarea, button {
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid lightgray;
 }
 
 button {
@@ -65,55 +65,81 @@ button:hover {
   background-color: lightsalmon;
 }
 
-.conditional-fields {
+.campos-condicionales {
   background-color: white;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid white;
 }
 
-/* Lista de eventos */
-.category-section {
-  margin-bottom: 20px;
+#mensaje-disponibilidad {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  background-color: lightgray;
 }
 
-.category-title {
+.available {
+  background-color: lightgreen;
+  border-color: green;
+  color: darkgreen;
+}
+
+.occupied {
+  background-color: lightcoral;
+  border-color: red;
+  color: darkred;
+}
+
+/* Lista de eventos */
+.seccion-categoria {
+  margin: 20px 0;
+}
+
+.parrilla-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.titulo-categoria {
   background-color: brown;
   color: white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-.clase-title {
+.titulo-clase {
   background-color: lightblue;
 }
 
-.evento-title {
+.titulo-evento {
   background-color: lightsalmon;
 }
 
-.event-card {
+.tarjeta-evento {
   background-color: lightgrey;
   border: 1px solid gray;
   padding: 15px;
   margin-bottom: 10px;
+  border-radius: 8px;
 }
 
-.clase-card {
+.clase-tarjeta {
   border-left: 3px solid lightblue;
 }
 
-.evento-card {
+.evento-tarjeta {
   border-left: 3px solid lightsalmon;
 }
 
-.event-header {
+.encabezado-evento {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.delete-btn {
+.btn-eliminar {
   background-color: red;
   color: white;
   border: none;
@@ -121,14 +147,14 @@ button:hover {
   cursor: pointer;
 }
 
-.event-details span {
+.detalles-evento span {
   display: inline-block;
   background-color: white;
   padding: 3px 8px;
   margin: 2px;
 }
 
-.empty {
+.vacia {
   text-align: center;
   color: gray;
   padding: 20px;
@@ -140,7 +166,7 @@ button:hover {
     flex-direction: column;
   }
   
-  .form-section {
+  .seccion-formulario {
     width: 100%;
   }
 }
