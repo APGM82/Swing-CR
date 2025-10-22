@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: white;
   margin: 0;
   padding: 20px;
 }
@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background-color: #8B4513;
+  background-color: lightcoral;
   color: white;
   text-align: center;
   padding: 20px;
@@ -56,20 +56,20 @@ input, select, textarea, button {
 }
 
 button {
-  background-color: #8B4513;
+  background-color: brown;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #6d3610;
+  background-color: lightsalmon;
 }
 
 .conditional-fields {
-  background-color: #f9f9f9;
+  background-color: white;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid white;
 }
 
 /* Lista de eventos */
@@ -78,33 +78,33 @@ button:hover {
 }
 
 .category-title {
-  background-color: #8B4513;
+  background-color: brown;
   color: white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .clase-title {
-  background-color: #4ECDC4;
+  background-color: lightblue;
 }
 
 .evento-title {
-  background-color: #FF6B6B;
+  background-color: lightsalmon;
 }
 
 .event-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: lightgrey;
+  border: 1px solid gray;
   padding: 15px;
   margin-bottom: 10px;
 }
 
 .clase-card {
-  border-left: 3px solid #4ECDC4;
+  border-left: 3px solid lightblue;
 }
 
 .evento-card {
-  border-left: 3px solid #FF6B6B;
+  border-left: 3px solid lightsalmon;
 }
 
 .event-header {
@@ -123,14 +123,14 @@ button:hover {
 
 .event-details span {
   display: inline-block;
-  background-color: #e0e0e0;
+  background-color: white;
   padding: 3px 8px;
   margin: 2px;
 }
 
 .empty {
   text-align: center;
-  color: #666;
+  color: gray;
   padding: 20px;
 }
 
