@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VII Festival de Swing - Ciudad Real</title>
-    <meta name="description" content="Registro de actividades y clases para el VII Festival de Swing de Ciudad Real">
+    <title>VIII Festival de Swing - Ciudad Real</title>
+    <meta name="description" content="Registro de actividades y clases para el VIII Festival de Swing de Ciudad Real">
     <meta name="keywords" content="swing, festival, ciudad real, baile, clases, eventos">
   </head>
   <body>
     <div id="app">
       <div class="container">
         <header>
-          <h1>Festival de Swing - Ciudad Real</h1>
+          <h1>VIII Festival de Swing - Ciudad Real</h1>
         </header>
         
         <main>
@@ -21,11 +21,44 @@
             <form id="event-form">
               <input type="text" id="event-name" placeholder="Nombre del evento" required>
               <select id="event-category" required>
-                <option value="">Selecciona categoría</option>
-                <option value="fiesta">Fiesta/Evento Social</option>
+                <option value="">Selecciona tipo</option>
                 <option value="clase">Clase</option>
+                <option value="evento">Evento</option>
               </select>
-              <input type="date" id="event-date" min="2025-10-24" max="2025-10-26" value="2025-10-24" required>
+              
+              <!-- Campos específicos para clases -->
+              <div id="clase-fields" class="conditional-fields" style="display: none;">
+                <input type="text" id="profesores" placeholder="Profesores">
+                <select id="estilo">
+                  <option value="">Estilo</option>
+                  <option value="Lindy Hop">Lindy Hop</option>
+                  <option value="Shag">Shag</option>
+                  <option value="Solo Jazz">Solo Jazz</option>
+                  <option value="Balboa">Balboa</option>
+                </select>
+                <select id="nivel">
+                  <option value="">Nivel</option>
+                  <option value="Básico">Básico</option>
+                  <option value="Intermedio">Intermedio</option>
+                  <option value="Avanzado">Avanzado</option>
+                </select>
+              </div>
+              
+              <!-- Campos específicos para eventos -->
+              <div id="evento-fields" class="conditional-fields" style="display: none;">
+                <input type="text" id="banda" placeholder="Banda (si toca en directo)">
+                <input type="text" id="profesores-evento" placeholder="Profesores implicados">
+                <select id="estilo-evento">
+                  <option value="">Estilo</option>
+                  <option value="Lindy Hop">Lindy Hop</option>
+                  <option value="Shag">Shag</option>
+                  <option value="Solo Jazz">Solo Jazz</option>
+                  <option value="Balboa">Balboa</option>
+                </select>
+                <textarea id="descripcion" placeholder="Descripción del evento"></textarea>
+              </div>
+              
+              <input type="date" id="event-date" min="2026-10-23" max="2026-10-25" value="2026-10-23" required>
               <input type="time" id="event-time" required>
               <select id="event-location" required disabled>
                 <option value="">Primero selecciona una categoría</option>

@@ -1,210 +1,146 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-  line-height: 1.6;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 20px;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
 }
 
 header {
-  text-align: center;
-  background: #8B4513;
+  background-color: #8B4513;
   color: white;
+  text-align: center;
   padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 h2 {
   color: #8B4513;
-  margin-bottom: 15px;
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  gap: 20px;
 }
 
-.form-section, .program-section {
-  background: white;
+.form-section {
+  background-color: white;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 400px;
 }
 
+.program-section {
+  background-color: white;
+  padding: 20px;
+  flex: 1;
+}
+
+/* Formulario */
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 
-input, button, select {
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-
-input:focus, select:focus {
-  outline: none;
-  border-color: #8B4513;
+input, select, textarea, button {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
 }
 
 button {
-  background: #8B4513;
+  background-color: #8B4513;
   color: white;
-  border: none;
   cursor: pointer;
-  font-weight: bold;
 }
 
 button:hover {
-  background: #A0522D;
+  background-color: #6d3610;
 }
 
-#events-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.conditional-fields {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+}
+
+/* Lista de eventos */
+.category-section {
+  margin-bottom: 20px;
+}
+
+.category-title {
+  background-color: #8B4513;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.clase-title {
+  background-color: #4ECDC4;
+}
+
+.evento-title {
+  background-color: #FF6B6B;
 }
 
 .event-card {
-  background: #f9f9f9;
+  background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-radius: 8px;
   padding: 15px;
+  margin-bottom: 10px;
+}
+
+.clase-card {
+  border-left: 3px solid #4ECDC4;
+}
+
+.evento-card {
+  border-left: 3px solid #FF6B6B;
 }
 
 .event-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 10px;
 }
 
-.event-header h3 {
-  margin: 0;
-  color: #8B4513;
-}
-
 .delete-btn {
-  background: #dc3545;
+  background-color: red;
   color: white;
   border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.delete-btn:hover {
-  background: #c82333;
-}
-
-.event-details {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
 }
 
 .event-details span {
-  background: #e9ecef;
-  padding: 4px 8px;
-  border-radius: 15px;
-  font-size: 0.9rem;
+  display: inline-block;
+  background-color: #e0e0e0;
+  padding: 3px 8px;
+  margin: 2px;
 }
 
 .empty {
   text-align: center;
   color: #666;
-  font-style: italic;
   padding: 20px;
 }
 
+/* Responsive básico */
 @media (max-width: 768px) {
   main {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
   
-  .container {
-    padding: 10px;
+  .form-section {
+    width: 100%;
   }
-  
-  h1 {
-    font-size: 1.5rem;
-  }
-}
-
-/* Estilos para categorías de eventos */
-.category-section {
-  margin-bottom: 30px;
-}
-
-.category-title {
-  background: linear-gradient(135deg, #8B4513, #A0522D);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
-}
-
-.fiesta-title {
-  background: linear-gradient(135deg, #FF6B6B, #FF8E53);
-}
-
-.clase-title {
-  background: linear-gradient(135deg, #4ECDC4, #44A08D);
-}
-
-.events-grid {
-  display: grid;
-  gap: 15px;
-}
-
-.fiesta-card {
-  border-left: 5px solid #FF6B6B;
-  background: linear-gradient(135deg, #fff5f5, #ffe8e8);
-}
-
-.clase-card {
-  border-left: 5px solid #4ECDC4;
-  background: linear-gradient(135deg, #f0fffe, #e8fffe);
-}
-
-.fiesta-card .event-header h4 {
-  color: #FF6B6B;
-}
-
-.clase-card .event-header h4 {
-  color: #4ECDC4;
-}
-
-.event-header h4 {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: bold;
 }

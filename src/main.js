@@ -28,6 +28,13 @@ function updateLocationOptions() {
   const category = document.getElementById('event-category').value;
   const locationSelect = document.getElementById('event-location');
   
+  // Mostrar/ocultar campos específicos
+  const claseFields = document.getElementById('clase-fields');
+  const eventoFields = document.getElementById('evento-fields');
+  
+  claseFields.style.display = 'none';
+  eventoFields.style.display = 'none';
+  
   // Limpiar opciones existentes
   locationSelect.innerHTML = '';
   
@@ -41,6 +48,9 @@ function updateLocationOptions() {
   locationSelect.innerHTML = '<option value="">Selecciona ubicación</option>';
   
   if (category === 'clase') {
+    // Mostrar campos específicos de clase
+    claseFields.style.display = 'block';
+    
     // Solo salas para clases
     const classSalas = ['Be Hopper', 'New Orleans', 'Savoy'];
     classSalas.forEach(sala => {
@@ -49,8 +59,11 @@ function updateLocationOptions() {
       option.textContent = sala;
       locationSelect.appendChild(option);
     });
-  } else if (category === 'fiesta') {
-    // Todas las ubicaciones para eventos sociales
+  } else if (category === 'evento') {
+    // Mostrar campos específicos de evento
+    eventoFields.style.display = 'block';
+    
+    // Todas las ubicaciones para eventos
     const allLocations = [
       'Antiguo Casino de Ciudad Real',
       'Parque de Gasset', 
@@ -72,14 +85,28 @@ function updateLocationOptions() {
 function handleSubmit(e) {
   e.preventDefault();
   
+  const category = document.getElementById('event-category').value;
+  
   const newEvent = {
     id: Date.now(),
     name: document.getElementById('event-name').value,
-    category: document.getElementById('event-category').value,
+    category: category,
     date: document.getElementById('event-date').value,
     time: document.getElementById('event-time').value,
     location: document.getElementById('event-location').value
   };
+  
+  // Agregar campos específicos según el tipo
+  if (category === 'clase') {
+    newEvent.profesores = document.getElementById('profesores').value;
+    newEvent.estilo = document.getElementById('estilo').value;
+    newEvent.nivel = document.getElementById('nivel').value;
+  } else if (category === 'evento') {
+    newEvent.banda = document.getElementById('banda').value;
+    newEvent.profesores = document.getElementById('profesores-evento').value;
+    newEvent.estilo = document.getElementById('estilo-evento').value;
+    newEvent.descripcion = document.getElementById('descripcion').value;
+  }
   
   // Validar ubicación según tipo de evento
   const locationError = validateEventLocation(newEvent);
@@ -100,6 +127,7 @@ function handleSubmit(e) {
   
   // Limpiar formulario
   e.target.reset();
+  updateLocationOptions(); // Resetear campos condicionales
   
   // Actualizar lista
   renderEvents();
@@ -121,8 +149,8 @@ function validateEventLocation(newEvent) {
     return `Las clases solo pueden realizarse en: ${classSalas.join(', ')}`;
   }
   
-  // Si es evento social en sala de clases, verificar que no haya clases en ese horario
-  if (newEvent.category === 'fiesta' && classSalas.includes(newEvent.location)) {
+  // Si es evento en sala de clases, verificar que no haya clases en ese horario
+  if (newEvent.category === 'evento' && classSalas.includes(newEvent.location)) {
     const classInSala = events.find(event => 
       event.category === 'clase' &&
       event.location === newEvent.location &&
@@ -143,14 +171,25 @@ function validateEventTime(newEvent) {
   const eventDate = newEvent.date;
   const eventTime = newEvent.time;
   
-  // Viernes: desde las 20:00
-  if (eventDate === '2025-10-24' && eventTime < '20:00') {
-    return `El viernes 24 el festival comienza a las 20:00h. Hora mínima: 20:00`;
+  // Viernes: desde las 20:00 hasta las 24:00
+  if (eventDate === '2026-10-23') {
+    if (eventTime < '20:00' || eventTime > '24:00') {
+      return `El viernes las actividades son de 20:00 a 24:00`;
+    }
   }
   
-  // Domingo: hasta las 20:00
-  if (eventDate === '2025-10-26' && eventTime > '20:00') {
-    return `El domingo 26 el festival termina a las 20:00h. Hora máxima: 20:00`;
+  // Sábado: de 20:00 a 24:00
+  if (eventDate === '2026-10-24') {
+    if (eventTime < '20:00' || eventTime > '24:00') {
+      return `El sábado las actividades son de 20:00 a 24:00`;
+    }
+  }
+  
+  // Domingo: de 20:00 a 24:00
+  if (eventDate === '2026-10-25') {
+    if (eventTime < '20:00' || eventTime > '24:00') {
+      return `El domingo las actividades son de 20:00 a 24:00`;
+    }
   }
   
   return null; // Sin errores
@@ -180,30 +219,30 @@ function renderEvents() {
   );
   
   // Agrupar por categoría
-  const fiestas = sortedEvents.filter(event => event.category === 'fiesta');
   const clases = sortedEvents.filter(event => event.category === 'clase');
+  const eventos = sortedEvents.filter(event => event.category === 'evento');
   
   let html = '';
-  
-  // Renderizar Fiestas/Eventos Sociales
-  if (fiestas.length > 0) {
-    html += `
-      <div class="category-section">
-        <h3 class="category-title fiesta-title">Fiestas y Eventos Sociales</h3>
-        <div class="events-grid">
-          ${fiestas.map(event => createEventCard(event, 'fiesta')).join('')}
-        </div>
-      </div>
-    `;
-  }
   
   // Renderizar Clases
   if (clases.length > 0) {
     html += `
       <div class="category-section">
-        <h3 class="category-title clase-title">Clases y Talleres</h3>
+        <h3 class="category-title clase-title">Clases</h3>
         <div class="events-grid">
-          ${clases.map(event => createEventCard(event, 'clase')).join('')}
+          ${clases.map(event => createEventCard(event)).join('')}
+        </div>
+      </div>
+    `;
+  }
+  
+  // Renderizar Eventos
+  if (eventos.length > 0) {
+    html += `
+      <div class="category-section">
+        <h3 class="category-title evento-title">Eventos</h3>
+        <div class="events-grid">
+          ${eventos.map(event => createEventCard(event)).join('')}
         </div>
       </div>
     `;
@@ -213,17 +252,33 @@ function renderEvents() {
 }
 
 // Crear tarjeta de evento
-function createEventCard(event, category) {
+function createEventCard(event) {
+  let detalles = `
+    <span>${formatDate(event.date)}</span>
+    <span>${event.time}</span>
+    <span>${event.location}</span>
+  `;
+  
+  // Agregar información específica según el tipo
+  if (event.category === 'clase') {
+    if (event.profesores) detalles += `<span>Profesores: ${event.profesores}</span>`;
+    if (event.estilo) detalles += `<span>Estilo: ${event.estilo}</span>`;
+    if (event.nivel) detalles += `<span>Nivel: ${event.nivel}</span>`;
+  } else {
+    if (event.banda) detalles += `<span>Banda: ${event.banda}</span>`;
+    if (event.profesores) detalles += `<span>Profesores: ${event.profesores}</span>`;
+    if (event.estilo) detalles += `<span>Estilo: ${event.estilo}</span>`;
+    if (event.descripcion) detalles += `<span>Descripción: ${event.descripcion}</span>`;
+  }
+  
   return `
-    <div class="event-card ${category}-card">
+    <div class="event-card ${event.category}-card">
       <div class="event-header">
         <h4>${event.name}</h4>
         <button onclick="deleteEvent(${event.id})" class="delete-btn">×</button>
       </div>
       <div class="event-details">
-        <span>${formatDate(event.date)}</span>
-        <span>${event.time}</span>
-        <span>${event.location}</span>
+        ${detalles}
       </div>
     </div>
   `;
