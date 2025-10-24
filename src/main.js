@@ -52,7 +52,7 @@ function actualizarUbicaciones() {
   
   // Mostrar campos específicos según el tipo
   if (categoria === 'clase') {
-    camposClase.style.display = 'block';
+    camposClase.style.display = 'block';le.display = 'block';
   } else if (categoria === 'evento') {
     camposEvento.style.display = 'block';
   }
@@ -240,24 +240,24 @@ function validarHorarioEvento(nuevoEvento) {
   const fechaEvento = nuevoEvento.date;
   const horaEvento = nuevoEvento.time;
   
-  // Viernes: desde las 20:00 hasta las 24:00
-  if (fechaEvento === '2026-10-23') {
+  // Viernes: de 20:00 a 24:00
+  if (fechaEvento === '2025-10-24') {
     if (horaEvento < '20:00' || horaEvento > '24:00') {
       return `El viernes las actividades son de 20:00 a 24:00`;
     }
   }
   
-  // Sábado: de 20:00 a 24:00
-  if (fechaEvento === '2026-10-24') {
-    if (horaEvento < '20:00' || horaEvento > '24:00') {
-      return `El sábado las actividades son de 20:00 a 24:00`;
+  // Sábado: de 16:00 a 24:00
+  if (fechaEvento === '2025-10-25') {
+    if (horaEvento < '16:00' || horaEvento > '24:00') {
+      return `El sábado las actividades son de 16:00 a 24:00`;
     }
   }
   
-  // Domingo: de 20:00 a 24:00
-  if (fechaEvento === '2026-10-25') {
-    if (horaEvento < '20:00' || horaEvento > '24:00') {
-      return `El domingo las actividades son de 20:00 a 24:00`;
+  // Domingo: de 16:00 a 20:00
+  if (fechaEvento === '2025-10-26') {
+    if (horaEvento < '16:00' || horaEvento > '20:00') {
+      return `El domingo las actividades son de 16:00 a 20:00`;
     }
   }
   

@@ -72,6 +72,11 @@ button:hover {
   border: 1px solid white;
 }
 
+#descripcion{
+  max-width: 100%;
+  min-width: 100%;
+}
+
 #mensaje-disponibilidad {
   margin-top: 10px;
   padding: 10px;
