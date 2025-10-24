@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: white;
   margin: 0;
   padding: 20px;
 }
@@ -11,7 +11,7 @@ body {
 }
 
 header {
-  background-color: #8B4513;
+  background-color: lightcoral;
   color: white;
   text-align: center;
   padding: 20px;
@@ -23,7 +23,7 @@ h1 {
 }
 
 h2 {
-  color: #8B4513;
+  color: brown;
 }
 
 main {
@@ -31,13 +31,13 @@ main {
   gap: 20px;
 }
 
-.form-section {
+.seccion-formulario {
   background-color: white;
   padding: 20px;
   width: 400px;
 }
 
-.program-section {
+.seccion-programa {
   background-color: white;
   padding: 20px;
   flex: 1;
@@ -52,68 +52,99 @@ form {
 input, select, textarea, button {
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid lightgray;
 }
 
 button {
-  background-color: #8B4513;
+  background-color: brown;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #6d3610;
+  background-color: lightsalmon;
 }
 
-.conditional-fields {
-  background-color: #f9f9f9;
+.campos-condicionales {
+  background-color: white;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #ddd;
+  border: 1px solid white;
+}
+
+#descripcion{
+  max-width: 100%;
+  min-width: 100%;
+}
+
+#mensaje-disponibilidad {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  background-color: lightgray;
+}
+
+.available {
+  background-color: lightgreen;
+  border-color: green;
+  color: darkgreen;
+}
+
+.occupied {
+  background-color: lightcoral;
+  border-color: red;
+  color: darkred;
 }
 
 /* Lista de eventos */
-.category-section {
-  margin-bottom: 20px;
+.seccion-categoria {
+  margin: 20px 0;
 }
 
-.category-title {
-  background-color: #8B4513;
+.parrilla-eventos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.titulo-categoria {
+  background-color: brown;
   color: white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
-.clase-title {
-  background-color: #4ECDC4;
+.titulo-clase {
+  background-color: lightblue;
 }
 
-.evento-title {
-  background-color: #FF6B6B;
+.titulo-evento {
+  background-color: lightsalmon;
 }
 
-.event-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+.tarjeta-evento {
+  background-color: lightgrey;
+  border: 1px solid gray;
   padding: 15px;
   margin-bottom: 10px;
+  border-radius: 8px;
 }
 
-.clase-card {
-  border-left: 3px solid #4ECDC4;
+.clase-tarjeta {
+  border-left: 3px solid lightblue;
 }
 
-.evento-card {
-  border-left: 3px solid #FF6B6B;
+.evento-tarjeta {
+  border-left: 3px solid lightsalmon;
 }
 
-.event-header {
+.encabezado-evento {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.delete-btn {
+.btn-eliminar {
   background-color: red;
   color: white;
   border: none;
@@ -121,16 +152,16 @@ button:hover {
   cursor: pointer;
 }
 
-.event-details span {
+.detalles-evento span {
   display: inline-block;
-  background-color: #e0e0e0;
+  background-color: white;
   padding: 3px 8px;
   margin: 2px;
 }
 
-.empty {
+.vacia {
   text-align: center;
-  color: #666;
+  color: gray;
   padding: 20px;
 }
 
@@ -140,7 +171,7 @@ button:hover {
     flex-direction: column;
   }
   
-  .form-section {
+  .seccion-formulario {
     width: 100%;
   }
 }

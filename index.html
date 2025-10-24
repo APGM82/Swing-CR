@@ -16,18 +16,28 @@
         </header>
         
         <main>
-          <section class="form-section">
+          <section class="seccion-formulario">
             <h2>Registrar Actividad</h2>
-            <form id="event-form">
-              <input type="text" id="event-name" placeholder="Nombre del evento" required>
-              <select id="event-category" required>
+            <form id="formulario-evento">
+              <input type="text" id="nombre-evento" placeholder="Nombre del evento" required>
+              <select id="categoria-evento" required>
                 <option value="">Selecciona tipo</option>
                 <option value="clase">Clase</option>
                 <option value="evento">Evento</option>
               </select>
               
+              <input type="date" id="fecha-evento" min="2025-10-24" max="2025-10-26" value="2025-10-24" required>
+              <input type="time" id="hora-evento" step="3600" required>
+              
+              <div id="info-ubicacion">
+                <select id="ubicacion-evento" required disabled>
+                  <option value="">Selecciona fecha, hora y tipo primero</option>
+                </select>
+                <div id="mensaje-disponibilidad"></div>
+              </div>
+              
               <!-- Campos específicos para clases -->
-              <div id="clase-fields" class="conditional-fields" style="display: none;">
+              <div id="campos-clase" class="campos-condicionales" style="display: none;">
                 <input type="text" id="profesores" placeholder="Profesores">
                 <select id="estilo">
                   <option value="">Estilo</option>
@@ -45,7 +55,7 @@
               </div>
               
               <!-- Campos específicos para eventos -->
-              <div id="evento-fields" class="conditional-fields" style="display: none;">
+              <div id="campos-evento" class="campos-condicionales" style="display: none;">
                 <input type="text" id="banda" placeholder="Banda (si toca en directo)">
                 <input type="text" id="profesores-evento" placeholder="Profesores implicados">
                 <select id="estilo-evento">
@@ -54,22 +64,16 @@
                   <option value="Shag">Shag</option>
                   <option value="Solo Jazz">Solo Jazz</option>
                   <option value="Balboa">Balboa</option>
-                </select>
+                </select><br>
                 <textarea id="descripcion" placeholder="Descripción del evento"></textarea>
               </div>
-              
-              <input type="date" id="event-date" min="2026-10-23" max="2026-10-25" value="2026-10-23" required>
-              <input type="time" id="event-time" required>
-              <select id="event-location" required disabled>
-                <option value="">Primero selecciona una categoría</option>
-              </select>
               <button type="submit">Agregar</button>
             </form>
           </section>
           
-          <section class="program-section">
+          <section class="seccion-programa">
             <h2>Programa del Festival</h2>
-            <div id="events-list"></div>
+            <div id="lista-eventos"></div>
           </section>
         </main>
       </div>
