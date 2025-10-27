@@ -12,6 +12,7 @@ function guardarEventos() {
 function inicializar() {
   configurarEventListeners();
   configurarDragDrop();
+  configurarVentanaDetalles();
   mostrarEventos();
   mostrarCalendario();
 }
@@ -199,14 +200,14 @@ function manejarEnvio(e) {
   // Validar que todo esté bien
   const errorUbicacion = validarUbicacionEvento(nuevoEvento);
   if (errorUbicacion) {
-    alert(errorUbicacion);
+    mostrarMensaje(errorUbicacion, true);
     return;
   }
   
   // Ver si hay conflicto con otro evento
   const conflicto = verificarConflictoUbicacion(nuevoEvento);
   if (conflicto) {
-    alert(`Conflicto de ubicación: Ya existe "${conflicto.name}" en ${conflicto.location} el ${formatearFecha(conflicto.date)} a las ${conflicto.time}`);
+    mostrarMensaje(`Ya hay otro evento en esa ubicación y hora`, true);
     return;
   }
   
@@ -214,10 +215,14 @@ function manejarEnvio(e) {
   eventos.push(nuevoEvento);
   guardarEventos();
   
+  // Mostrar que se agregó bien
+  const tipoTexto = categoria === 'clase' ? 'Clase' : 'Evento';
+  mostrarMensaje(`${tipoTexto} agregado correctamente`);
+  
   // Limpiar el formulario y actualizar todo
   e.target.reset();
   actualizarUbicaciones();
-  mostrarEventos();
+  mostrarEventos(nuevoEvento.id);
   mostrarCalendario();
 }
 
@@ -300,7 +305,7 @@ function verificarConflictoUbicacion(nuevoEvento) {
 }
 
 // Mostrar todos los eventos en la lista
-function mostrarEventos() {
+function mostrarEventos(eventoNuevoId = null) {
   const listaEventos = document.getElementById('lista-eventos');
   
   if (eventos.length === 0) {
@@ -344,6 +349,20 @@ function mostrarEventos() {
   }
   
   listaEventos.innerHTML = html;
+  
+  // Si hay un evento nuevo, ponerlo verde para que se vea
+  if (eventoNuevoId) {
+    setTimeout(() => {
+      const tarjetaNueva = document.querySelector(`[data-evento-id="${eventoNuevoId}"]`);
+      if (tarjetaNueva) {
+        tarjetaNueva.classList.add('nueva');
+        // Quitar el verde después de unos segundos
+        setTimeout(() => {
+          tarjetaNueva.classList.remove('nueva');
+        }, 3000);
+      }
+    }, 100);
+  }
 }
 
 // Crear tarjeta de evento
@@ -389,6 +408,9 @@ function eliminarEvento(id) {
     guardarEventos();
     mostrarEventos();
     mostrarCalendario();
+    
+    // Avisar que se borró
+    mostrarMensaje('Evento eliminado');
   }
 }
 
@@ -427,6 +449,9 @@ function mostrarCalendario() {
       
       // Para poder arrastrarlo
       eventoDiv.addEventListener('dragstart', manejarDragStart);
+      
+      // Para ver los detalles cuando hacen clic
+      eventoDiv.addEventListener('click', () => mostrarDetallesEvento(evento.id));
       
       celda.appendChild(eventoDiv);
     }
@@ -508,15 +533,75 @@ function manejarDrop(e) {
       evento.date = fechaAntigua;
       evento.time = horaAntigua;
       
-      alert(`Conflicto de ubicación: Ya existe "${conflicto.name}" en ${conflicto.location} a las ${conflicto.time}`);
+      mostrarMensaje('No se puede mover ahí, ya hay otro evento', true);
       mostrarCalendario();
     } else {
       // Si está bien, guardar
       guardarEventos();
       mostrarCalendario();
       mostrarEventos();
+      
+      // Avisar que se movió
+      mostrarMensaje('Evento movido correctamente');
     }
   }
+}
+
+// Mostrar ventana con detalles del evento
+function mostrarDetallesEvento(eventoId) {
+  // Buscar el evento
+  const evento = eventos.find(ev => ev.id === eventoId);
+  if (!evento) return;
+  
+  // Poner el título
+  const titulo = document.getElementById('ventana-titulo');
+  titulo.textContent = evento.name;
+  
+  // Crear la información del evento
+  let info = `
+    <p><strong>Categoría:</strong> ${evento.category === 'clase' ? 'Clase' : 'Evento'}</p>
+    <p><strong>Fecha:</strong> ${formatearFecha(evento.date)}</p>
+    <p><strong>Hora:</strong> ${evento.time}</p>
+    <p><strong>Ubicación:</strong> ${evento.location}</p>
+  `;
+  
+  // Agregar info específica según el tipo
+  if (evento.category === 'clase') {
+    if (evento.profesores) info += `<p><strong>Profesores:</strong> ${evento.profesores}</p>`;
+    if (evento.estilo) info += `<p><strong>Estilo:</strong> ${evento.estilo}</p>`;
+    if (evento.nivel) info += `<p><strong>Nivel:</strong> ${evento.nivel}</p>`;
+  } else {
+    if (evento.banda) info += `<p><strong>Banda:</strong> ${evento.banda}</p>`;
+    if (evento.profesores) info += `<p><strong>Profesores:</strong> ${evento.profesores}</p>`;
+    if (evento.estilo) info += `<p><strong>Estilo:</strong> ${evento.estilo}</p>`;
+    if (evento.descripcion) info += `<p><strong>Descripción:</strong> ${evento.descripcion}</p>`;
+  }
+  
+  // Poner la info en la ventana
+  document.getElementById('ventana-info').innerHTML = info;
+  
+  // Mostrar la ventana
+  document.getElementById('ventana-detalles').style.display = 'block';
+}
+
+// Cerrar la ventana
+function cerrarVentana() {
+  document.getElementById('ventana-detalles').style.display = 'none';
+}
+
+// Configurar los botones de la ventana
+function configurarVentanaDetalles() {
+  // Botón de cerrar (la X)
+  const botonCerrar = document.querySelector('.cerrar-ventana');
+  botonCerrar.addEventListener('click', cerrarVentana);
+  
+  // Si hacen clic fuera de la ventana, también cerrarla
+  const ventana = document.getElementById('ventana-detalles');
+  window.addEventListener('click', (e) => {
+    if (e.target === ventana) {
+      cerrarVentana();
+    }
+  });
 }
 
 window.eliminarEvento = eliminarEvento;
