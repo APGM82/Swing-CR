@@ -13,6 +13,7 @@ function inicializar() {
   configurarEventListeners();
   configurarDragDrop();
   configurarVentanaDetalles();
+  configurarBotonPrograma();
   mostrarEventos();
   mostrarCalendario();
 }
@@ -606,6 +607,108 @@ function configurarVentanaDetalles() {
   });
 }
 
+// boton para el programa
+function configurarBotonPrograma() {
+  const btn = document.getElementById('btn-programa');
+  if (btn) {
+    btn.addEventListener('click', mostrarPrograma);
+  }
+}
+
+// mostrar el programa completo
+function mostrarPrograma() {
+  const listaDiv = document.getElementById('lista-eventos');
+  
+  if (eventos.length == 0) {
+    mostrarMensaje('No hay eventos todavía', true);
+    return;
+  }
+  
+  // agrupar por dias
+  let viernes = [];
+  let sabado = [];
+  let domingo = [];
+  
+  for (let i = 0; i < eventos.length; i++) {
+    if (eventos[i].date == '2025-10-24') {
+      viernes.push(eventos[i]);
+    } else if (eventos[i].date == '2025-10-25') {
+      sabado.push(eventos[i]);
+    } else if (eventos[i].date == '2025-10-26') {
+      domingo.push(eventos[i]);
+    }
+  }
+  
+  // ordenar por hora
+  viernes.sort((a, b) => a.time.localeCompare(b.time));
+  sabado.sort((a, b) => a.time.localeCompare(b.time));
+  domingo.sort((a, b) => a.time.localeCompare(b.time));
+  
+  let html = '<div class="programa-completo">';
+  html += '<h2>Programa del Festival</h2>';
+  
+  // viernes
+  if (viernes.length > 0) {
+    html += '<div class="dia-programa">';
+    html += '<h3>Viernes 24 de Octubre</h3>';
+    for (let i = 0; i < viernes.length; i++) {
+      html += hacerTarjetaPrograma(viernes[i]);
+    }
+    html += '</div>';
+  }
+  
+  // sabado
+  if (sabado.length > 0) {
+    html += '<div class="dia-programa">';
+    html += '<h3>Sábado 25 de Octubre</h3>';
+    for (let i = 0; i < sabado.length; i++) {
+      html += hacerTarjetaPrograma(sabado[i]);
+    }
+    html += '</div>';
+  }
+  
+  // domingo
+  if (domingo.length > 0) {
+    html += '<div class="dia-programa">';
+    html += '<h3>Domingo 26 de Octubre</h3>';
+    for (let i = 0; i < domingo.length; i++) {
+      html += hacerTarjetaPrograma(domingo[i]);
+    }
+    html += '</div>';
+  }
+  
+  html += '<button onclick="volverLista()" class="btn-volver">Volver a la lista</button>';
+  html += '</div>';
+  
+  listaDiv.innerHTML = html;
+}
+
+// crear tarjeta para el programa
+function hacerTarjetaPrograma(ev) {
+  let tipo = ev.category == 'clase' ? 'clase-prog' : 'evento-prog';
+  let html = `<div class="tarjeta-programa ${tipo}">`;
+  html += `<div class="hora-prog">${ev.time}</div>`;
+  html += `<div class="info-prog">`;
+  html += `<strong>${ev.name}</strong> - ${ev.location}<br>`;
+  
+  if (ev.category == 'clase') {
+    if (ev.profesores) html += `Profes: ${ev.profesores}<br>`;
+    if (ev.nivel) html += `Nivel: ${ev.nivel}`;
+  } else {
+    if (ev.banda) html += `Banda: ${ev.banda}<br>`;
+    if (ev.descripcion) html += `${ev.descripcion}`;
+  }
+  
+  html += '</div></div>';
+  return html;
+}
+
+// volver a la lista normal
+function volverLista() {
+  mostrarEventos();
+}
+
 window.eliminarEvento = eliminarEvento;
+window.volverLista = volverLista;
 
 inicializar();

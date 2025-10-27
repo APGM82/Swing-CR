@@ -547,3 +547,75 @@ button:hover {
     font-size: 14px;
   }
 }
+
+/* Boton del programa */
+.btn-programa {
+  background: brown;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.btn-programa:hover {
+  background: darkred;
+}
+
+/* programa completo */
+.programa-completo {
+  background: white;
+  padding: 20px;
+  border: 2px solid brown;
+  border-radius: 8px;
+}
+
+.dia-programa {
+  margin-bottom: 25px;
+}
+
+.dia-programa h3 {
+  background: brown;
+  color: white;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  border-radius: 5px;
+}
+
+.tarjeta-programa {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  margin: 8px 0;
+  border-left: 4px solid lightcoral;
+  background: #fffef8;
+}
+
+.tarjeta-programa.clase-prog {
+  border-left-color: lightblue;
+}
+
+.hora-prog {
+  font-weight: bold;
+  color: brown;
+  min-width: 60px;
+}
+
+.info-prog {
+  flex: 1;
+}
+
+.btn-volver {
+  background: brown;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.btn-volver:hover {
+  background: darkred;
+}
