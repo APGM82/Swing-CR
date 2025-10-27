@@ -126,6 +126,26 @@ function obtenerSoloHora(hora) {
   return hora.split(':')[0];
 }
 
+// Mostrar mensaje simple cuando se agrega algo
+function mostrarMensaje(texto, esError = false) {
+  const contenedor = document.getElementById('contenedor-notificaciones');
+  
+  // Crear div para el mensaje
+  const mensaje = document.createElement('div');
+  mensaje.className = esError ? 'mensaje-confirmacion error' : 'mensaje-confirmacion';
+  mensaje.textContent = texto;
+  mensaje.style.display = 'block';
+  
+  // Ponerlo en la página
+  contenedor.appendChild(mensaje);
+  
+  // Quitarlo después de 1 segundos
+  setTimeout(() => {
+    mensaje.style.display = 'none';
+    contenedor.removeChild(mensaje);
+  }, 1000);
+}
+
 // Mostrar cuántas ubicaciones hay libres
 function mostrarMensajeDisponibilidad(datosDisponibilidad, divMensaje) {
   let mensaje = '';

@@ -27,6 +27,110 @@ h1 {
   margin: 0;
 }
 
+.subtitulo {
+  font-size: 1.3em;
+  margin: 0 0 20px 0;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+.fechas-festival {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.fecha-item {
+  background-color: rgba(255,255,255,0.2);
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.95em;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.descripcion-festival {
+  margin: 15px 0 0 0;
+  font-size: 1.1em;
+  opacity: 0.8;
+}
+
+/* Mensaje simple para avisar cuando se agrega algo */
+.mensaje-confirmacion {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  background-color: lightgreen;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 2px solid green;
+  z-index: 1000;
+  display: none;
+}
+
+.mensaje-confirmacion.error {
+  background-color: lightcoral;
+  border-color: red;
+}
+
+/* Poner verde el evento nuevo para que se vea */
+.tarjeta-evento.nueva {
+  background-color: lightgreen !important;
+  border: 2px solid green !important;
+}
+
+/* Ventana emergente para mostrar detalles */
+.ventana-popup {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.ventana-contenido {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border: 3px solid brown;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.cerrar-ventana {
+  color: brown;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cerrar-ventana:hover {
+  color: red;
+}
+
+#ventana-info {
+  margin-top: 20px;
+}
+
+#ventana-info p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+#ventana-info strong {
+  color: brown;
+}
+
+
+
 h2 {
   color: brown;
 }
