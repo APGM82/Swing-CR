@@ -9,10 +9,31 @@
     <meta name="keywords" content="swing, festival, ciudad real, baile, clases, eventos">
   </head>
   <body>
+    <!-- Contenedor para notificaciones -->
+    <div id="contenedor-notificaciones"></div>
+    
+    <!-- Ventana para ver detalles del evento -->
+    <div id="ventana-detalles" class="ventana-popup">
+      <div class="ventana-contenido">
+        <span class="cerrar-ventana">&times;</span>
+        <h2 id="ventana-titulo"></h2>
+        <div id="ventana-info"></div>
+      </div>
+    </div>
+    
     <div id="app">
       <div class="container">
-        <header>
-          <h1>VIII Festival de Swing - Ciudad Real</h1>
+        <header class="cabecera-festival">
+          <div class="contenido-cabecera">
+            <h1>VIII Festival de Swing</h1>
+            <p class="subtitulo">Ciudad Real 2025</p>
+            <div class="fechas-festival">
+              <span class="fecha-item">24 Oct - Viernes</span>
+              <span class="fecha-item">25 Oct - Sábado</span>
+              <span class="fecha-item">26 Oct - Domingo</span>
+            </div>
+            <p class="descripcion-festival">Gestión de eventos, clases y actividades del festival</p>
+          </div>
         </header>
         
         <main>
@@ -72,6 +93,11 @@
           </section>
           
           <div class="contenedor-principal">
+            <section class="seccion-programa">
+              <h2>Lista de Eventos</h2>
+              <div id="lista-eventos"></div>
+            </section>
+            
             <section class="seccion-calendario">
               <h2>Calendario del Festival</h2>
               <div id="calendario" class="calendario-grid">
@@ -135,11 +161,6 @@
                 <div class="celda-calendario" data-fecha="2025-10-25" data-hora="24:00"></div>
                 <div class="celda-bloqueada"></div>
               </div>
-            </section>
-            
-            <section class="seccion-programa">
-              <h2>Lista de Eventos</h2>
-              <div id="lista-eventos"></div>
             </section>
           </div>
         </main>
