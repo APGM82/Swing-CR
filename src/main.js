@@ -329,7 +329,7 @@ function mostrarEventos(eventoNuevoId = null) {
     html += `
       <div class="seccion-categoria">
         <h3 class="titulo-categoria titulo-clase">Clases</h3>
-        <div class="parrilla-eventos">
+        <div class="contenedor-tarjetas">
           ${clases.map(evento => crearTarjetaEvento(evento)).join('')}
         </div>
       </div>
@@ -341,7 +341,7 @@ function mostrarEventos(eventoNuevoId = null) {
     html += `
       <div class="seccion-categoria">
         <h3 class="titulo-categoria titulo-evento">Eventos</h3>
-        <div class="parrilla-eventos">
+        <div class="contenedor-tarjetas">
           ${eventosLista.map(evento => crearTarjetaEvento(evento)).join('')}
         </div>
       </div>
@@ -497,6 +497,7 @@ function manejarDragLeave(e) {
 
 // Cuando sueltan el evento en una celda
 function manejarDrop(e) {
+  console.log('¡¡¡¡moviendo evento!!!!');
   e.preventDefault();
   e.currentTarget.classList.remove('drag-over');
   
@@ -518,7 +519,8 @@ function manejarDrop(e) {
     
     // Ver si hay conflicto
     const conflicto = eventos.find(ev => {
-      if (ev.id === eventoId) return false; // No comparar consigo mismo
+      // No comparar consigo mismo
+      if (ev.id === eventoId) return false; 
       
       const horaEvento = obtenerSoloHora(ev.time);
       const horaNueva = obtenerSoloHora(nuevaHora);
@@ -533,7 +535,7 @@ function manejarDrop(e) {
       evento.date = fechaAntigua;
       evento.time = horaAntigua;
       
-      mostrarMensaje('No se puede mover ahí, ya hay otro evento', true);
+      mostrarMensaje('No se puede mover a esa hora, ya hay otro evento en esa sala', true);
       mostrarCalendario();
     } else {
       // Si está bien, guardar
