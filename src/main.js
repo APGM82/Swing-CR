@@ -135,17 +135,29 @@ function mostrarMensaje(texto, esError = false) {
   // Crear div para el mensaje
   const mensaje = document.createElement('div');
   mensaje.className = esError ? 'mensaje-confirmacion error' : 'mensaje-confirmacion';
-  mensaje.textContent = texto;
   mensaje.style.display = 'block';
+  
+  // Crear texto y botón cerrar
+  const textoSpan = document.createElement('span');
+  textoSpan.textContent = texto;
+  
+  const btnCerrar = document.createElement('button');
+  btnCerrar.textContent = '×';
+  btnCerrar.className = 'btn-cerrar-notificacion';
+  btnCerrar.onclick = () => contenedor.removeChild(mensaje);
+  
+  mensaje.appendChild(textoSpan);
+  mensaje.appendChild(btnCerrar);
   
   // Ponerlo en la página
   contenedor.appendChild(mensaje);
   
-  // Quitarlo después de 1 segundos
+  // Quitarlo automáticamente después de 10 segundos
   setTimeout(() => {
-    mensaje.style.display = 'none';
-    contenedor.removeChild(mensaje);
-  }, 1000);
+    if (mensaje.parentNode === contenedor) {
+      contenedor.removeChild(mensaje);
+    }
+  }, 10000);
 }
 
 // Mostrar cuántas ubicaciones hay libres
@@ -404,16 +416,41 @@ function crearTarjetaEvento(evento) {
 
 // Borrar un evento
 function eliminarEvento(id) {
-  if (confirm('¿Eliminar este evento?')) {
-    eventos = eventos.filter(evento => evento.id !== id);
-    guardarEventos();
-    mostrarEventos();
-    mostrarCalendario();
-    
-    // Avisar que se borró
-    mostrarMensaje('Evento eliminado');
-  }
+  // Mostrar confirmación inline en lugar de confirm()
+  const tarjeta = document.querySelector(`[data-evento-id="${id}"]`);
+  if (!tarjeta) return;
+  
+  // Si ya hay confirmación, no hacer nada
+  if (tarjeta.querySelector('.confirmacion-borrar')) return;
+  
+  const confirmacion = document.createElement('div');
+  confirmacion.className = 'confirmacion-borrar';
+  confirmacion.innerHTML = `
+    <span>¿Eliminar?</span>
+    <button onclick="confirmarEliminar(${id})" class="btn-si">Sí</button>
+    <button onclick="cancelarEliminar(${id})" class="btn-no">No</button>
+  `;
+  tarjeta.appendChild(confirmacion);
 }
+
+// Confirmar eliminación
+function confirmarEliminar(id) {
+  eventos = eventos.filter(evento => evento.id !== id);
+  guardarEventos();
+  mostrarEventos();
+  mostrarCalendario();
+  mostrarMensaje('Evento eliminado');
+}
+
+// Cancelar eliminación
+function cancelarEliminar(id) {
+  const tarjeta = document.querySelector(`[data-evento-id="${id}"]`);
+  const confirmacion = tarjeta?.querySelector('.confirmacion-borrar');
+  if (confirmacion) confirmacion.remove();
+}
+
+window.confirmarEliminar = confirmarEliminar;
+window.cancelarEliminar = cancelarEliminar;
 
 // Poner la fecha en formato bonito
 function formatearFecha(fechaStr) {

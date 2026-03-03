@@ -37,18 +37,40 @@
         </header>
         
         <main>
-          <section class="seccion-formulario">
-            <h2>Registrar Actividad</h2>
+          <section class="seccion-formulario" aria-labelledby="titulo-formulario">
+            <h2 id="titulo-formulario">Registrar Actividad</h2>
             <form id="formulario-evento">
+              <label for="nombre-evento" class="sr-only">Nombre del evento</label>
               <input type="text" id="nombre-evento" placeholder="Nombre del evento" required>
-              <select id="categoria-evento" required>
+              
+              <label for="categoria-evento" class="sr-only">Tipo de evento</label>
+              <select id="categoria-evento" required aria-label="Tipo de evento">
                 <option value="">Selecciona tipo</option>
                 <option value="clase">Clase</option>
-                <option value="evento">Evento</option>
+                <option value="evento">Actividad</option>
               </select>
               
-              <input type="date" id="fecha-evento" min="2025-10-24" max="2025-10-26" value="2025-10-24" required>
-              <input type="time" id="hora-evento" step="3600" required>
+              <label for="fecha-evento" class="sr-only">Fecha</label>
+              <input type="date" id="fecha-evento" min="2025-10-24" max="2025-10-26" value="2025-10-24" required aria-label="Fecha del evento">
+              <label for="hora-evento" class="sr-only">Hora</label>
+              <select id="hora-evento" required aria-label="Hora del evento">
+                <option value="">Selecciona hora</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+                <option value="22:00">22:00</option>
+                <option value="23:00">23:00</option>
+              </select>
               
               <div id="info-ubicacion">
                 <select id="ubicacion-evento" required disabled>
